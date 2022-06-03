@@ -13,7 +13,7 @@
 namespace Shanmuga\LaravelEntrust\Models;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 use Shanmuga\LaravelEntrust\Traits\LaravelEntrustRoleTrait;
 use Shanmuga\LaravelEntrust\Contracts\LaravelEntrustRoleInterface;
 
