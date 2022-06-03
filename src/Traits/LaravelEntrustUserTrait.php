@@ -168,7 +168,6 @@ trait LaravelEntrustUserTrait
         }
         else {
             foreach ($this->customCachedRoles() as $role) {
-              
                 // Validate against the Permission table
                 foreach ($this->customCachedPermissions($role->_id) as $perm) {
                     if (Str::is( $permission, $perm->name) ) {
