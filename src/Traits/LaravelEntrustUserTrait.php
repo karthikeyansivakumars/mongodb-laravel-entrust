@@ -167,9 +167,9 @@ trait LaravelEntrustUserTrait
             return $requireAll;
         }
         else {
-            foreach ($this->cachedRoles() as $role) {
+            foreach ($this->customCachedRoles() as $role) {
                 // Validate against the Permission table
-                foreach ($role->cachedPermissions() as $perm) {
+                foreach (this->customCachedPermissions($role->_id) as $perm) {
                     if (Str::is( $permission, $perm->name) ) {
                         return true;
                     }
@@ -178,6 +178,18 @@ trait LaravelEntrustUserTrait
         }
 
         return false;
+    }
+    
+    public function customCachedRoles(){
+
+        $RolesID = \DB::table('role_user')->where('user_id',$this->id)->pluck('role_id')->toArray();
+        return \App\Models\Role::whereIn('_id',$RolesID)->get();
+    }
+
+    public function customCachedPermissions($id){
+
+        $permissionsID = \DB::table('permission_role')->where('role_id',$id)->pluck('permission_id')->toArray();
+        return \App\Models\Permission::whereIn('_id',$permissionsID)->get();    
     }
 
     /**
